@@ -1,0 +1,5 @@
+{
+  "CES":{
+  	"public": "https://ces.%(region)s.%(domain)s/v1.0/%(projectId)s"
+  }
+}
