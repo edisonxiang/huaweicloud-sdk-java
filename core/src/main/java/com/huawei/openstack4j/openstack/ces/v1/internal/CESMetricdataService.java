@@ -1,5 +1,5 @@
  /*******************************************************************************
- * 	Copyright 2018 Huawei Technologies Co.,Ltd.
+ * 	Copyright 2019 Huawei Technologies Co.,Ltd.
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -41,7 +41,7 @@ public class CESMetricdataService extends BaseCESService {
     /**
      * 查询主机配置数据
      */
-    public GetEventDataResp getEventData(String dim0, String dim1, String dim2, Integer from, String namespace, Integer to, String type, ) {
+    public GetEventDataResp getEventData(String dim0, String dim1, String dim2, Integer from, String namespace, Integer to, String type) {
         checkArgument(!Strings.isNullOrEmpty(dim0), "parameter `dim0` should not be empty");
         checkArgument(null != from, "parameter `from` should not be null");
         checkArgument(!Strings.isNullOrEmpty(namespace), "parameter `namespace` should not be empty");
@@ -54,7 +54,7 @@ public class CESMetricdataService extends BaseCESService {
     /**
      * 查询监控数据
      */
-    public MetricData getMetricData(String dim0, String dim1, String dim2, String filter, Integer from, String metricName, String namespace, Integer period, Integer to, ) {
+    public MetricData getMetricData(String dim0, String dim1, String dim2, String filter, Integer from, String metricName, String namespace, Integer period, Integer to) {
         checkArgument(!Strings.isNullOrEmpty(dim0), "parameter `dim0` should not be empty");
         checkArgument(!Strings.isNullOrEmpty(filter), "parameter `filter` should not be empty");
         checkArgument(null != from, "parameter `from` should not be null");
