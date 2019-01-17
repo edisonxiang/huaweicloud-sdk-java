@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,16 +49,19 @@ public class Resource implements ModelEntity {
      */
     @JsonProperty("quota")
     private Integer quota;
+
     /**
      * 配额类型。  枚举值说明：  alarm，告警规则
      */
     @JsonProperty("type")
     private String type;
+
     /**
      * 单位。
      */
     @JsonProperty("unit")
     private String unit;
+
     /**
      * 已使用配额数。
      */

@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 查询指标列表
@@ -44,6 +49,7 @@ public class MetricList implements ModelEntity {
      */
     @JsonProperty("metrics")
     private List<Metric> metrics;
+
     /**
      * 查询结果元数据信息，包括分页信息等
      */

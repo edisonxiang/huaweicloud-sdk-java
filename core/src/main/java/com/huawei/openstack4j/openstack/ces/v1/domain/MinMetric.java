@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,11 +49,13 @@ public class MinMetric implements ModelEntity {
      */
     @JsonProperty("dimensions")
     private List<MetricsDimension> dimensions;
+
     /**
      * 指标名称，必须以字母开头，只能包含0-9/a-z/A-Z/_，长度最短为1，最大为64。 具体指标名请参见查询指标列表中查询出的指标名。
      */
     @JsonProperty("metric_name")
     private String metricName;
+
     /**
      * 
      */

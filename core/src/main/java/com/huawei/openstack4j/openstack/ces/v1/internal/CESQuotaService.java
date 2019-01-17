@@ -24,6 +24,8 @@ import java.util.Map;
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * CESQuotaService
@@ -35,6 +37,6 @@ public class CESQuotaService extends BaseCESService {
      */
     public GetQuotasResp getQuotas() {
 
-        return get(GetQuotasResp, "/quotas").execute();
+        return get(GetQuotasResp.class, "/quotas").execute();
     }
 }

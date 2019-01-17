@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 查询结果元数据信息，包括分页信息等。
@@ -44,11 +49,13 @@ public class MetaData implements ModelEntity {
      */
     @JsonProperty("count")
     private Integer count;
+
     /**
      * 总条数。
      */
     @JsonProperty("total")
     private Integer total;
+
     /**
      * 下一个开始的标记，用于分页。
      */

@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,11 +49,13 @@ public class Datapoint implements ModelEntity {
      */
     @JsonProperty("average")
     private Double average;
+
     /**
      * 指标采集时间。
      */
     @JsonProperty("timestamp")
     private Integer timestamp;
+
     /**
      * 指标单位
      */

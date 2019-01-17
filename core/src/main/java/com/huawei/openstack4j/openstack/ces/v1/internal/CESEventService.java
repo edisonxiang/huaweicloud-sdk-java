@@ -24,6 +24,8 @@ import java.util.Map;
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * CESEventService
@@ -36,6 +38,6 @@ public class CESEventService extends BaseCESService {
     public List<Event> createEvents(List<EventItem> body) {
         checkArgument(null != body, "parameter `body` should not be null");
 
-        return post(List<Event>.class, "/events").entity(body).execute();
+        return post(Event.Events.class, "/events").entity(body).execute().getList();
     }
 }

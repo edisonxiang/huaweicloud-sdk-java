@@ -24,6 +24,8 @@ import java.util.Map;
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * CESAlarmService
@@ -41,29 +43,29 @@ public class CESAlarmService extends BaseCESService {
     /**
      * 删除告警规则
      */
-    public ActionResponse deleteOneAlarm(String alarmId, ) {
+    public ActionResponse deleteOneAlarm(String alarmId) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
         return ToActionResponseFunction.INSTANCE
-                .apply(delete(Void.class, "/alarms" + "/alarmId"))
+                .apply(delete(Void.class, "/alarms" + "/alarmId")
                         .executeWithResponse());
-    }
-
-    /**
-     * 查询告警规则列表
-     */
-    public GetAlarmsResp getAlarms(Integer limit, String order, String start) {
-
-        return get(GetAlarmsResp, "/alarms").execute();
     }
 
     /**
      * 查询单条告警规则信息
      */
-    public GetSingleMetricAlarm getSingleAlarm(String alarmId, ) {
+    public GetSingleMetricAlarm getSingleAlarm(String alarmId) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
-        return get(GetSingleMetricAlarm, "/alarms" + "/alarmId").execute();
+        return get(GetSingleMetricAlarm.class, "/alarms" + "/alarmId").execute();
+    }
+
+    /**
+     * 查询告警规则列表
+     */
+    public GetAllMetricAlarms listAlarm(Integer limit, String order, String start) {
+
+        return get(GetAllMetricAlarms.class, "/alarms").execute();
     }
 
     /**
@@ -71,7 +73,6 @@ public class CESAlarmService extends BaseCESService {
      */
     public String modifyAlarmAction(String alarmId, ModifyAlarmActionReq modifyAlarmActionReq) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
-        checkArgument(null != modifyAlarmActionReq, "parameter `modifyAlarmActionReq` should not be null");
 
         return put(String.class, "/alarms" + "/alarmId" + "/action").entity(modifyAlarmActionReq).execute();
     }

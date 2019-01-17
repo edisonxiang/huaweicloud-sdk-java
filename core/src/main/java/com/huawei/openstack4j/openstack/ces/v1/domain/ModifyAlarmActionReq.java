@@ -38,21 +38,15 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InsufficientdataActions implements ModelEntity {
+public class ModifyAlarmActionReq implements ModelEntity {
     /**
      * serialVersionUID
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     * 告警是否启用。true：启动。false：停止
      */
-    @JsonProperty("type")
-    private String type;
-
-    /**
-     * 
-     */
-    @JsonProperty("notificationList")
-    private List<String> notificationList;
+    @JsonProperty("alarm_enabled")
+    private Boolean alarmEnabled;
 }

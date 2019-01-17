@@ -24,6 +24,8 @@ import java.util.Map;
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * CESMetricService
@@ -36,14 +38,14 @@ public class CESMetricService extends BaseCESService {
     @Deprecated
     public GetFavoriteMetricsResp getFavoriteMetrics() {
 
-        return get(GetFavoriteMetricsResp, "/favorite-metrics").execute();
+        return get(GetFavoriteMetricsResp.class, "/favorite-metrics").execute();
     }
 
     /**
      * 查询指标列表
      */
-    public MetricList getMetrics(String dim0, String dim1, String dim2, Integer limit, String metricName, String namespace, String order, String start) {
+    public MetricList listMetrics(String dim0, String dim1, String dim2, Integer limit, String metricName, String namespace, String order, String start) {
 
-        return get(MetricList, "/metrics").execute();
+        return get(MetricList.class, "/metrics").execute();
     }
 }

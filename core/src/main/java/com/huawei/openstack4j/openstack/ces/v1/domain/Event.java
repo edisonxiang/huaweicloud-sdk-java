@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,9 +49,27 @@ public class Event implements ModelEntity {
      */
     @JsonProperty("event_id")
     private String eventId;
+
     /**
      * 事件名称。  必须以字母开头，只能包含0-9/a-z/A-Z/_，长度最短为1，最大为64。
      */
     @JsonProperty("event_name")
     private String eventName;
+
+    /**
+     * 上报事件
+     */
+    public static class Events extends ListResult<Event> {
+        /**
+        * serialVersionUID
+        */
+        private static final long serialVersionUID = 1L;
+
+        protected List<Event> list;
+
+        @Override
+        public List<Event> value() {
+            return list;
+        }
+    }
 }

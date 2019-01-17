@@ -24,11 +24,21 @@ import java.util.Map;
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * CESMetricdataService
  */
 public class CESMetricdataService extends BaseCESService {
+
+    /**
+     * 添加监控数据
+     */
+    public ActionResponse addMetricData(List<AddMetricDataItem> addMetricDataItem) {
+
+        return post(ActionResponse.class, "/metric-data").entity(addMetricDataItem).execute();
+    }
 
     /**
      * 批量查询监控数据
@@ -48,7 +58,7 @@ public class CESMetricdataService extends BaseCESService {
         checkArgument(null != to, "parameter `to` should not be null");
         checkArgument(!Strings.isNullOrEmpty(type), "parameter `type` should not be empty");
 
-        return get(GetEventDataResp, "/event-data").execute();
+        return get(GetEventDataResp.class, "/event-data").execute();
     }
 
     /**
@@ -63,14 +73,6 @@ public class CESMetricdataService extends BaseCESService {
         checkArgument(null != period, "parameter `period` should not be null");
         checkArgument(null != to, "parameter `to` should not be null");
 
-        return get(MetricData, "/metric-data").execute();
-    }
-
-    /**
-     * 添加监控数据
-     */
-    public void postMetricData(List<AddMetricDataItem> addMetricDataItem) {
-
-        return post(.class, "/metric-data").entity(addMetricDataItem).execute();
+        return get(MetricData.class, "/metric-data").execute();
     }
 }

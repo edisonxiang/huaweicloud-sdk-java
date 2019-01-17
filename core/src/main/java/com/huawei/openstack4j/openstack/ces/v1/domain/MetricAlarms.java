@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,56 +49,67 @@ public class MetricAlarms implements ModelEntity {
      */
     @JsonProperty("alarm_name")
     private String alarmName;
+
     /**
      * 告警描述。
      */
     @JsonProperty("alarm_description")
     private String alarmDescription;
+
     /**
      * 告警指标。
      */
     @JsonProperty("metric")
     private Metric metric;
+
     /**
      * 告警触发条件。
      */
     @JsonProperty("condition")
     private Condition condition;
+
     /**
      * 是否启用该条告警。
      */
     @JsonProperty("alarm_enabled")
     private Boolean alarmEnabled;
+
     /**
      * 告警级别，默认为2，级别为1、2、3、4。分别对应紧急、重要、次要、提示。
      */
     @JsonProperty("alarm_level")
     private Integer alarmLevel;
+
     /**
      * 是否启用该条告警触发的动作。
      */
     @JsonProperty("alarm_action_enabled")
     private Boolean alarmActionEnabled;
+
     /**
      * 告警触发的动作。  结构如下：  {  \"type\": \"notification\", \"notificationList\": [\"urn:smn:southchina:68438a86d98e427e907e0097b7e35d47:sd\"]  }  type取值： notification：通知。 autoscaling：弹性伸缩。 notificationList：告警状态发生变化时，被通知对象的列表。
      */
     @JsonProperty("alarm_actions")
     private List<AlarmActions> alarmActions;
+
     /**
      * 告警恢复触发的动作。  结构如下：  {  \"type\": \"notification\", \"notificationList\": [\"urn:smn:southchina:68438a86d98e427e907e0097b7e35d47:sd\"]  }  type取值：  notification：通知。  notificationList：告警状态发生变化时，被通知对象的列表。
      */
     @JsonProperty("ok_actions")
     private List<OkActions> okActions;
+
     /**
      * 告警规则的ID。
      */
     @JsonProperty("alarm_id")
     private String alarmId;
+
     /**
      * 告警状态变更的时间，UNIX时间戳，单位毫秒。
      */
     @JsonProperty("update_time")
     private Integer updateTime;
+
     /**
      * 告警状态，取值说明：  ok，正常 alarm，告警 insufficient_data，数据不足
      */

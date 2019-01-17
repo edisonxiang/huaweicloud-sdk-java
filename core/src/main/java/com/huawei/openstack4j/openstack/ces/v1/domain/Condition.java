@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,26 +49,31 @@ public class Condition implements ModelEntity {
      */
     @JsonProperty("comparison_operator")
     private String comparisonOperator;
+
     /**
      * 
      */
     @JsonProperty("count")
     private Integer count;
+
     /**
      * 
      */
     @JsonProperty("filter")
     private String filter;
+
     /**
      * 
      */
     @JsonProperty("period")
     private Integer period;
+
     /**
      * 
      */
     @JsonProperty("unit")
     private String unit;
+
     /**
      * 
      */

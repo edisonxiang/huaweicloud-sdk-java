@@ -38,7 +38,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InsufficientdataActions implements ModelEntity {
+public class GetAllMetricAlarms implements ModelEntity {
     /**
      * serialVersionUID
      */
@@ -47,12 +47,12 @@ public class InsufficientdataActions implements ModelEntity {
     /**
      * 
      */
-    @JsonProperty("type")
-    private String type;
+    @JsonProperty("metric_alarms")
+    private List<MetricAlarms> metricAlarms;
 
     /**
      * 
      */
-    @JsonProperty("notificationList")
-    private List<String> notificationList;
+    @JsonProperty("meta_data")
+    private MetaData metaData;
 }

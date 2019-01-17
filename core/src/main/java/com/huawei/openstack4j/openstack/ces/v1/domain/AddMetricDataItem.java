@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,26 +49,31 @@ public class AddMetricDataItem implements ModelEntity {
      */
     @JsonProperty("metric")
     private Metric metric;
+
     /**
      * 数据的有效期，超出该有效期则自动删除该数据，单位秒，最大值604800。
      */
     @JsonProperty("ttl")
     private Integer ttl;
+
     /**
      * 数据收集时间  UNIX时间戳，单位毫秒。  说明： 因为客户端到服务器端有延时，因此插入数据的时间戳应该在[当前时间-3天+20秒，当前时间+10分钟-20秒]区间内，保证到达服务器时不会因为传输时延造成数据不能插入数据库。
      */
     @JsonProperty("collect_time")
     private Integer collectTime;
+
     /**
      * 指标数据的值。
      */
     @JsonProperty("value")
     private Double value;
+
     /**
      * 数据的单位。
      */
     @JsonProperty("unit")
     private String unit;
+
     /**
      * 数据的类型，只能是\"int\"或\"float\"
      */

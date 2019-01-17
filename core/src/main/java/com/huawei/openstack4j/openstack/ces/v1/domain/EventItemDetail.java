@@ -23,7 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * 
@@ -44,34 +49,120 @@ public class EventItemDetail implements ModelEntity {
      */
     @JsonProperty("content")
     private String content;
+
     /**
      * 所属分组。  资源分组对应的ID，必须传存在的分组ID。
      */
     @JsonProperty("group_id")
     private String groupId;
+
     /**
      * 资源ID，支持字母、数字_ -：，最大长度128。
      */
     @JsonProperty("resource_id")
     private String resourceId;
+
     /**
      * 资源名称，支持字母 中文 数字_ -. ，最大长度128。
      */
     @JsonProperty("resource_name")
     private String resourceName;
+
+    /**
+    * 事件状态。  枚举类型：normal\\warning\\incident
+    */
+    public enum EventStateEnum {
+        NORMAL("normal"),
+        WARNING("warning"),
+        INCIDENT("incident");
+
+        private final String value;
+
+        private EventStateEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String value() {
+            return value;
+        }
+
+        @JsonCreator
+        public static EventStateEnum value(String v) {
+            if (v == null || v.isEmpty()) return null;
+            for (EventStateEnum t : EventStateEnum.values()) {
+                if (String.valueOf(t.value).equals(v)) {
+                    return t;
+                }
+            }
+            return null;
+        }
+    }
+
     /**
      * 事件状态。  枚举类型：normal\\warning\\incident
      */
     @JsonProperty("event_state")
     private EventStateEnum eventState;
+
+    /**
+    * 事件级别。  枚举类型：Critical, Major, Minor, Info
+    */
+    public enum EventLevelEnum {
+        CRITICAL("Critical"),
+        MAJOR("Major"),
+        MINOR("Minor"),
+        INFO("Info");
+
+        private final String value;
+
+        private EventLevelEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String value() {
+            return value;
+        }
+
+        @JsonCreator
+        public static EventLevelEnum value(String v) {
+            if (v == null || v.isEmpty()) return null;
+            for (EventLevelEnum t : EventLevelEnum.values()) {
+                if (String.valueOf(t.value).equals(v)) {
+                    return t;
+                }
+            }
+            return null;
+        }
+    }
+
     /**
      * 事件级别。  枚举类型：Critical, Major, Minor, Info
      */
     @JsonProperty("event_level")
     private EventLevelEnum eventLevel;
+
     /**
      * 事件用户。  支持字母 数字_ -/空格 ，最大长度64。
      */
     @JsonProperty("event_user")
     private String eventUser;
+
+    /**
+     * 上报事件
+     */
+    public static class Events extends ListResult<Event> {
+        /**
+        * serialVersionUID
+        */
+        private static final long serialVersionUID = 1L;
+
+        protected List<Event> list;
+
+        @Override
+        public List<Event> value() {
+            return list;
+        }
+    }
 }
