@@ -23,17 +23,22 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
- * This is a auto create Response Object
+ * 用户已关注指标列表
  */
 @Getter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAlarmsResp implements ModelEntity {
+public class FavoriteMetricsResponse implements ModelEntity {
     /**
      * serialVersionUID
      */
@@ -42,11 +47,6 @@ public class GetAlarmsResp implements ModelEntity {
     /**
      * 
      */
-    @JsonProperty("metric_alarms")
-    private MetricAlarms metricAlarms;
-    /**
-     * 分页信息
-     */
-    @JsonProperty("mete_data ")
-    private MetaData meteData_;
+    @JsonProperty("favorite_metrics")
+    private List<String> favoriteMetrics;
 }

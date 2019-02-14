@@ -45,16 +45,16 @@ public class Resource implements ModelEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 配额总数。
-     */
-    @JsonProperty("quota")
-    private Integer quota;
-
-    /**
      * 配额类型。  枚举值说明：  alarm，告警规则
      */
     @JsonProperty("type")
     private String type;
+
+    /**
+     * 已使用配额数。
+     */
+    @JsonProperty("used")
+    private Integer used;
 
     /**
      * 单位。
@@ -63,8 +63,8 @@ public class Resource implements ModelEntity {
     private String unit;
 
     /**
-     * 已使用配额数。
+     * 配额总数。
      */
-    @JsonProperty("used")
-    private Integer used;
+    @JsonProperty("quota")
+    private Integer quota;
 }

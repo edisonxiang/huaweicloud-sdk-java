@@ -48,7 +48,7 @@ public class AddMetricDataItem implements ModelEntity {
      * 指标数据。
      */
     @JsonProperty("metric")
-    private Metric metric;
+    private MetricInfo metric;
 
     /**
      * 数据的有效期，超出该有效期则自动删除该数据，单位秒，最大值604800。

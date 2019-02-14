@@ -18,10 +18,12 @@ package com.huawei.openstack4j.openstack.ces.v1.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
 import com.huawei.openstack4j.model.common.ActionResponse;
@@ -33,19 +35,19 @@ import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFuncti
 public class CESMetricdataService extends BaseCESService {
 
     /**
-     * 添加监控数据
-     */
-    public ActionResponse addMetricData(List<AddMetricDataItem> addMetricDataItem) {
-
-        return post(ActionResponse.class, "/metric-data").entity(addMetricDataItem).execute();
-    }
-
-    /**
      * 批量查询监控数据
      */
     public GetBatchMetricDataResp batchQueryMetricData(GetBatchMetricDataReq getBatchMetricDataReq) {
 
         return post(GetBatchMetricDataResp.class, "/batch-query-metric-data").entity(getBatchMetricDataReq).execute();
+    }
+
+    /**
+     * 添加监控数据
+     */
+    public ActionResponse createMetricData(List<AddMetricDataItem> addMetricDataItem) {
+
+        return post(ActionResponse.class, "/metric-data").entity(addMetricDataItem).execute();
     }
 
     /**
@@ -58,7 +60,16 @@ public class CESMetricdataService extends BaseCESService {
         checkArgument(null != to, "parameter `to` should not be null");
         checkArgument(!Strings.isNullOrEmpty(type), "parameter `type` should not be empty");
 
-        return get(GetEventDataResp.class, "/event-data").execute();
+        HashMap<String, Object> parameters = Maps.newHashMap();
+		parameters.put("dim0", dim0);
+		parameters.put("dim1", dim1);
+		parameters.put("dim2", dim2);
+		parameters.put("from", from);
+		parameters.put("namespace", namespace);
+		parameters.put("to", to);
+		parameters.put("type", type);
+
+        return get(GetEventDataResp.class, "/event-data").params(parameters).execute();
     }
 
     /**
@@ -73,6 +84,17 @@ public class CESMetricdataService extends BaseCESService {
         checkArgument(null != period, "parameter `period` should not be null");
         checkArgument(null != to, "parameter `to` should not be null");
 
-        return get(MetricData.class, "/metric-data").execute();
+        HashMap<String, Object> parameters = Maps.newHashMap();
+		parameters.put("dim0", dim0);
+		parameters.put("dim1", dim1);
+		parameters.put("dim2", dim2);
+		parameters.put("filter", filter);
+		parameters.put("from", from);
+		parameters.put("metricName", metricName);
+		parameters.put("namespace", namespace);
+		parameters.put("period", period);
+		parameters.put("to", to);
+
+        return get(MetricData.class, "/metric-data").params(parameters).execute();
     }
 }

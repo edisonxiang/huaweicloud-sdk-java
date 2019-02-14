@@ -31,22 +31,34 @@ import com.huawei.openstack4j.openstack.common.ListResult;
 import java.util.List;
 
 /**
- * This is a auto create Response Object
+ * 
  */
 @Getter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEventDataResp implements ModelEntity {
+public class EventDataInfo implements ModelEntity {
     /**
      * serialVersionUID
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     * 事件类型，例如instance_host_info。
      */
-    @JsonProperty("datapoints")
-    private List<EventDataInfo> datapoints;
+    @JsonProperty("type")
+    private String type;
+
+    /**
+     * 事件上报时间。
+     */
+    @JsonProperty("timestamp")
+    private Integer timestamp;
+
+    /**
+     * 主机配置信息。
+     */
+    @JsonProperty("value")
+    private String value;
 }

@@ -60,7 +60,7 @@ public class CreateAlarmReq implements ModelEntity {
      * 告警指标。
      */
     @JsonProperty("metric")
-    private Metric metric;
+    private MetricInfoExt metric;
 
     /**
      * 告警触发条件。
@@ -87,6 +87,42 @@ public class CreateAlarmReq implements ModelEntity {
     private Integer alarmLevel;
 
     /**
+    * 告警类型。仅针对事件告警的参数，枚举类型：EVENT.SYS或者EVENT.CUSTOM
+    */
+    public enum AlarmTypeEnum {
+        SYS("EVENT.SYS"),
+        CUSTOM("EVENT.CUSTOM");
+
+        private final String value;
+
+        private AlarmTypeEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String value() {
+            return value;
+        }
+
+        @JsonCreator
+        public static AlarmTypeEnum value(String v) {
+            if (v == null || v.isEmpty()) return null;
+            for (AlarmTypeEnum t : AlarmTypeEnum.values()) {
+                if (String.valueOf(t.value).equals(v)) {
+                    return t;
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
+     * 告警类型。仅针对事件告警的参数，枚举类型：EVENT.SYS或者EVENT.CUSTOM
+     */
+    @JsonProperty("alarm_type")
+    private AlarmTypeEnum alarmType;
+
+    /**
      * 告警触发的动作。 结构样例如下： { \"type\": \"notification\",\"notificationList\": [\"urn:smn:southchina:68438a86d98e427e907e0097b7e35d47:sd\"] } type取值：notification：通知。 autoscaling：弹性伸缩。
      */
     @JsonProperty("alarm_actions")
@@ -96,11 +132,11 @@ public class CreateAlarmReq implements ModelEntity {
      * 数据不足触发的动作（该参数已废弃，建议无需配置）。
      */
     @JsonProperty("insufficientdata_actions")
-    private List<InsufficientdataActions> insufficientdataActions;
+    private List<AlarmActions> insufficientdataActions;
 
     /**
-     * 
+     * 告警恢复触发的动作
      */
     @JsonProperty("ok_actions")
-    private List<OkActions> okActions;
+    private List<AlarmActions> okActions;
 }

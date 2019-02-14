@@ -60,7 +60,7 @@ public class MetricAlarms implements ModelEntity {
      * 告警指标。
      */
     @JsonProperty("metric")
-    private Metric metric;
+    private MetricInfo metric;
 
     /**
      * 告警触发条件。
@@ -81,6 +81,42 @@ public class MetricAlarms implements ModelEntity {
     private Integer alarmLevel;
 
     /**
+    * 告警类型。仅针对事件告警的参数，枚举类型：EVENT.SYS或者EVENT.CUSTOM
+    */
+    public enum AlarmTypeEnum {
+        SYS("EVENT.SYS"),
+        CUSTOM("EVENT.CUSTOM");
+
+        private final String value;
+
+        private AlarmTypeEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String value() {
+            return value;
+        }
+
+        @JsonCreator
+        public static AlarmTypeEnum value(String v) {
+            if (v == null || v.isEmpty()) return null;
+            for (AlarmTypeEnum t : AlarmTypeEnum.values()) {
+                if (String.valueOf(t.value).equals(v)) {
+                    return t;
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
+     * 告警类型。仅针对事件告警的参数，枚举类型：EVENT.SYS或者EVENT.CUSTOM
+     */
+    @JsonProperty("alarm_type")
+    private AlarmTypeEnum alarmType;
+
+    /**
      * 是否启用该条告警触发的动作。
      */
     @JsonProperty("alarm_action_enabled")
@@ -96,7 +132,7 @@ public class MetricAlarms implements ModelEntity {
      * 告警恢复触发的动作。  结构如下：  {  \"type\": \"notification\", \"notificationList\": [\"urn:smn:southchina:68438a86d98e427e907e0097b7e35d47:sd\"]  }  type取值：  notification：通知。  notificationList：告警状态发生变化时，被通知对象的列表。
      */
     @JsonProperty("ok_actions")
-    private List<OkActions> okActions;
+    private List<AlarmActions> okActions;
 
     /**
      * 告警规则的ID。
@@ -108,7 +144,7 @@ public class MetricAlarms implements ModelEntity {
      * 告警状态变更的时间，UNIX时间戳，单位毫秒。
      */
     @JsonProperty("update_time")
-    private Integer updateTime;
+    private Long updateTime;
 
     /**
      * 告警状态，取值说明：  ok，正常 alarm，告警 insufficient_data，数据不足

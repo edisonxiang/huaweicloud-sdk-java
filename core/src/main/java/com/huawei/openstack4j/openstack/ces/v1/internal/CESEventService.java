@@ -18,10 +18,12 @@ package com.huawei.openstack4j.openstack.ces.v1.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
 import com.huawei.openstack4j.model.common.ActionResponse;

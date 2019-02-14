@@ -48,7 +48,7 @@ public class MetricList implements ModelEntity {
      * 指标信息列表
      */
     @JsonProperty("metrics")
-    private List<Metric> metrics;
+    private List<MetricInfo> metrics;
 
     /**
      * 查询结果元数据信息，包括分页信息等

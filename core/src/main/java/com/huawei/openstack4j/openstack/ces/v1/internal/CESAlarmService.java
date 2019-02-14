@@ -18,10 +18,12 @@ package com.huawei.openstack4j.openstack.ces.v1.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 import com.huawei.openstack4j.openstack.ces.v1.domain.*;
 import com.huawei.openstack4j.model.common.ActionResponse;
@@ -47,7 +49,7 @@ public class CESAlarmService extends BaseCESService {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
         return ToActionResponseFunction.INSTANCE
-                .apply(delete(Void.class, "/alarms" + "/alarmId")
+                .apply(delete(Void.class, "/alarms" + "/" + alarmId)
                         .executeWithResponse());
     }
 
@@ -57,7 +59,7 @@ public class CESAlarmService extends BaseCESService {
     public GetSingleMetricAlarm getSingleAlarm(String alarmId) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
-        return get(GetSingleMetricAlarm.class, "/alarms" + "/alarmId").execute();
+        return get(GetSingleMetricAlarm.class, "/alarms" + "/" + alarmId).execute();
     }
 
     /**
@@ -65,7 +67,12 @@ public class CESAlarmService extends BaseCESService {
      */
     public GetAllMetricAlarms listAlarm(Integer limit, String order, String start) {
 
-        return get(GetAllMetricAlarms.class, "/alarms").execute();
+        HashMap<String, Object> parameters = Maps.newHashMap();
+		parameters.put("limit", limit);
+		parameters.put("order", order);
+		parameters.put("start", start);
+
+        return get(GetAllMetricAlarms.class, "/alarms").params(parameters).execute();
     }
 
     /**
@@ -74,6 +81,6 @@ public class CESAlarmService extends BaseCESService {
     public String modifyAlarmAction(String alarmId, ModifyAlarmActionReq modifyAlarmActionReq) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
-        return put(String.class, "/alarms" + "/alarmId" + "/action").entity(modifyAlarmActionReq).execute();
+        return put(String.class, "/alarms" + "/" + alarmId + "/action").entity(modifyAlarmActionReq).execute();
     }
 }
