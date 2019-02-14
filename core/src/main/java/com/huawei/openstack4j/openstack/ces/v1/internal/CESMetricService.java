@@ -49,14 +49,14 @@ public class CESMetricService extends BaseCESService {
     public MetricList listMetric(String dim0, String dim1, String dim2, Integer limit, String metricName, String namespace, String order, String start) {
 
         HashMap<String, Object> parameters = Maps.newHashMap();
-		parameters.put("dim0", dim0);
-		parameters.put("dim1", dim1);
-		parameters.put("dim2", dim2);
-		parameters.put("limit", limit);
-		parameters.put("metricName", metricName);
-		parameters.put("namespace", namespace);
-		parameters.put("order", order);
-		parameters.put("start", start);
+        parameters.put("dim0", dim0);
+        parameters.put("dim1", dim1);
+        parameters.put("dim2", dim2);
+        parameters.put("limit", limit);
+        parameters.put("metricName", metricName);
+        parameters.put("namespace", namespace);
+        parameters.put("order", order);
+        parameters.put("start", start);
 
         return get(MetricList.class, "/metrics").params(parameters).execute();
     }

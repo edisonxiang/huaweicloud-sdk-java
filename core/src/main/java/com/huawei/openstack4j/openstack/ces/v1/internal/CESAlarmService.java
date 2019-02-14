@@ -68,9 +68,9 @@ public class CESAlarmService extends BaseCESService {
     public GetAllMetricAlarms listAlarm(Integer limit, String order, String start) {
 
         HashMap<String, Object> parameters = Maps.newHashMap();
-		parameters.put("limit", limit);
-		parameters.put("order", order);
-		parameters.put("start", start);
+        parameters.put("limit", limit);
+        parameters.put("order", order);
+        parameters.put("start", start);
 
         return get(GetAllMetricAlarms.class, "/alarms").params(parameters).execute();
     }

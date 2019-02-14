@@ -61,13 +61,13 @@ public class CESMetricdataService extends BaseCESService {
         checkArgument(!Strings.isNullOrEmpty(type), "parameter `type` should not be empty");
 
         HashMap<String, Object> parameters = Maps.newHashMap();
-		parameters.put("dim0", dim0);
-		parameters.put("dim1", dim1);
-		parameters.put("dim2", dim2);
-		parameters.put("from", from);
-		parameters.put("namespace", namespace);
-		parameters.put("to", to);
-		parameters.put("type", type);
+        parameters.put("dim0", dim0);
+        parameters.put("dim1", dim1);
+        parameters.put("dim2", dim2);
+        parameters.put("from", from);
+        parameters.put("namespace", namespace);
+        parameters.put("to", to);
+        parameters.put("type", type);
 
         return get(GetEventDataResp.class, "/event-data").params(parameters).execute();
     }
@@ -85,15 +85,15 @@ public class CESMetricdataService extends BaseCESService {
         checkArgument(null != to, "parameter `to` should not be null");
 
         HashMap<String, Object> parameters = Maps.newHashMap();
-		parameters.put("dim0", dim0);
-		parameters.put("dim1", dim1);
-		parameters.put("dim2", dim2);
-		parameters.put("filter", filter);
-		parameters.put("from", from);
-		parameters.put("metricName", metricName);
-		parameters.put("namespace", namespace);
-		parameters.put("period", period);
-		parameters.put("to", to);
+        parameters.put("dim0", dim0);
+        parameters.put("dim1", dim1);
+        parameters.put("dim2", dim2);
+        parameters.put("filter", filter);
+        parameters.put("from", from);
+        parameters.put("metricName", metricName);
+        parameters.put("namespace", namespace);
+        parameters.put("period", period);
+        parameters.put("to", to);
 
         return get(MetricData.class, "/metric-data").params(parameters).execute();
     }
