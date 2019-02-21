@@ -31,14 +31,14 @@ import com.huawei.openstack4j.openstack.common.ListResult;
 import java.util.List;
 
 /**
- * 用户已关注指标列表
+ * 
  */
 @Getter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavoriteMetricsResponse implements ModelEntity {
+public class Alarm implements ModelEntity {
     /**
      * serialVersionUID
      */
@@ -47,6 +47,6 @@ public class FavoriteMetricsResponse implements ModelEntity {
     /**
      * 
      */
-    @JsonProperty("favorite_metrics")
-    private List<String> favoriteMetrics;
+    @JsonProperty("metric_alarms")
+    private List<MetricAlarms> metricAlarms;
 }

@@ -31,14 +31,14 @@ import com.huawei.openstack4j.openstack.common.ListResult;
 import java.util.List;
 
 /**
- * 
+ * 用户已关注指标列表
  */
 @Getter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetBatchMetricDataResp implements ModelEntity {
+public class Metric implements ModelEntity {
     /**
      * serialVersionUID
      */
@@ -47,6 +47,6 @@ public class GetBatchMetricDataResp implements ModelEntity {
     /**
      * 
      */
-    @JsonProperty("metrics")
-    private List<BatchMetricData> metrics;
+    @JsonProperty("favorite_metrics")
+    private List<String> favoriteMetrics;
 }

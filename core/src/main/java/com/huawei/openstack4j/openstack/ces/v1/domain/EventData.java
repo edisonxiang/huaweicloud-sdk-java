@@ -38,7 +38,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEventDataResp implements ModelEntity {
+public class EventData implements ModelEntity {
     /**
      * serialVersionUID
      */

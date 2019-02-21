@@ -16,37 +16,59 @@
 
 package com.huawei.openstack4j.openstack.ces.v1.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.huawei.openstack4j.model.ModelEntity;
-import com.huawei.openstack4j.openstack.common.ListResult;
-
-import java.util.List;
+import com.google.common.collect.Maps;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * This is a auto create Response Object
+ * 查询主机配置数据
  */
-@Getter
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class GetQuotasResp implements ModelEntity {
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
+public class EventDataFilterOption {
+    
+    private Map<String, Object> queryParams = Maps.newHashMap();
 
-    /**
-     * 
-     */
-    @JsonProperty("quotas")
-    private Quotas quotas;
+    private EventDataFilterOption() {
+    }
+
+    private EventDataFilterOption add(String param, Object value) {
+        if (value != null)
+            this.queryParams.put(param, value);
+        return this;
+    }
+
+    public static EventDataFilterOption create() {
+        return new EventDataFilterOption();
+    }
+
+    public Map<String, Object> getOptions() {
+        return queryParams;
+    }
+
+    public EventDataFilterOption dim0(String dim0) {
+        return add("dim.0", dim0);
+    }
+
+    public EventDataFilterOption dim1(String dim1) {
+        return add("dim.1", dim1);
+    }
+
+    public EventDataFilterOption dim2(String dim2) {
+        return add("dim.2", dim2);
+    }
+
+    public EventDataFilterOption from(Integer from) {
+        return add("from", from);
+    }
+
+    public EventDataFilterOption namespace(String namespace) {
+        return add("namespace", namespace);
+    }
+
+    public EventDataFilterOption to(Integer to) {
+        return add("to", to);
+    }
+
+    public EventDataFilterOption type(String type) {
+        return add("type", type);
+    }
 }

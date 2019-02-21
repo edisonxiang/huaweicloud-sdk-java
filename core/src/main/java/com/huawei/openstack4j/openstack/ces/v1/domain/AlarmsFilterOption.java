@@ -16,43 +16,43 @@
 
 package com.huawei.openstack4j.openstack.ces.v1.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.huawei.openstack4j.model.ModelEntity;
-import com.huawei.openstack4j.openstack.common.ListResult;
-
-import java.util.List;
+import com.google.common.collect.Maps;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * 
+ * 查询告警规则列表
  */
-@Getter
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class MetricData implements ModelEntity {
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
+public class AlarmsFilterOption {
+    
+    private Map<String, Object> queryParams = Maps.newHashMap();
 
-    /**
-     *  指标数据列表。由于查询数据时，云监控会根据所选择的聚合粒度向前取整from参数，所以datapoints中包含的数据点有可能会多于预期。
-     */
-    @JsonProperty("datapoints")
-    private List<Datapoint> datapoints;
+    private AlarmsFilterOption() {
+    }
 
-    /**
-     * 指标名称，例如弹性云服务器监控指标中的cpu_util。
-     */
-    @JsonProperty("metric_name")
-    private String metricName;
+    private AlarmsFilterOption add(String param, Object value) {
+        if (value != null)
+            this.queryParams.put(param, value);
+        return this;
+    }
+
+    public static AlarmsFilterOption create() {
+        return new AlarmsFilterOption();
+    }
+
+    public Map<String, Object> getOptions() {
+        return queryParams;
+    }
+
+    public AlarmsFilterOption limit(Integer limit) {
+        return add("limit", limit);
+    }
+
+    public AlarmsFilterOption order(String order) {
+        return add("order", order);
+    }
+
+    public AlarmsFilterOption start(String start) {
+        return add("start", start);
+    }
 }

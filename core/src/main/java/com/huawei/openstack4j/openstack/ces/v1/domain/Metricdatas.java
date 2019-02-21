@@ -14,32 +14,39 @@
  * 	the License.                                                                     
  *******************************************************************************/
 
-package com.huawei.openstack4j.openstack.ces.v1.internal;
+package com.huawei.openstack4j.openstack.ces.v1.domain;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
 import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
-
-import com.huawei.openstack4j.openstack.ces.v1.domain.*;
-import com.huawei.openstack4j.model.common.ActionResponse;
-import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
- * CESEventService
+ * 
  */
-public class CESEventService extends BaseCESService {
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Metricdatas implements ModelEntity {
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
-     * 上报事件
+     * 
      */
-    public List<Event> create(List<EventItem> body) {
-        checkArgument(null != body, "parameter `body` should not be null");
-
-        return post(Event.Events.class, "/events").entity(body).execute().getList();
-    }
+    @JsonProperty("metrics")
+    private List<BatchMetricData> metrics;
 }

@@ -38,26 +38,26 @@ public class CESMetricService extends BaseCESService {
      * 查询已关注指标
      */
     @Deprecated
-    public FavoriteMetricsResponse getFavoriteMetrics() {
+    public Metric get() {
 
-        return get(FavoriteMetricsResponse.class, "/favorite-metrics").execute();
+        return get(Metric.class, "/favorite-metrics").execute();
     }
 
     /**
      * 查询指标列表
      */
-    public MetricList listMetric(String dim0, String dim1, String dim2, Integer limit, String metricName, String namespace, String order, String start) {
+    public Metrics list() {
 
-        HashMap<String, Object> parameters = Maps.newHashMap();
-        parameters.put("dim0", dim0);
-        parameters.put("dim1", dim1);
-        parameters.put("dim2", dim2);
-        parameters.put("limit", limit);
-        parameters.put("metricName", metricName);
-        parameters.put("namespace", namespace);
-        parameters.put("order", order);
-        parameters.put("start", start);
+        return get(Metrics.class, "/metrics").execute();
+    }
 
-        return get(MetricList.class, "/metrics").params(parameters).execute();
+    /**
+     * 查询指标列表
+     */
+    public Metrics list(MetricsFilterOption option) {
+        checkArgument(null != option, "parameter `option` should not be null");
+        Map<String, Object> parameters = option.getOptions();
+
+        return get(Metrics.class, "/metrics").params(parameters).execute();
     }
 }

@@ -38,7 +38,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateOneAlarmResp implements ModelEntity {
+public class Alarms implements ModelEntity {
     /**
      * serialVersionUID
      */
@@ -47,6 +47,12 @@ public class CreateOneAlarmResp implements ModelEntity {
     /**
      * 
      */
-    @JsonProperty("alarm_id")
-    private String alarmId;
+    @JsonProperty("metric_alarms")
+    private List<MetricAlarms> metricAlarms;
+
+    /**
+     * 
+     */
+    @JsonProperty("meta_data")
+    private MetaData metaData;
 }

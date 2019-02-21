@@ -31,28 +31,22 @@ import com.huawei.openstack4j.openstack.common.ListResult;
 import java.util.List;
 
 /**
- * 查询指标列表
+ * 
  */
 @Getter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MetricList implements ModelEntity {
+public class AlarmResp implements ModelEntity {
     /**
      * serialVersionUID
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 指标信息列表
+     * 
      */
-    @JsonProperty("metrics")
-    private List<MetricInfo> metrics;
-
-    /**
-     * 查询结果元数据信息，包括分页信息等
-     */
-    @JsonProperty("meta_data")
-    private MetaData metaData;
+    @JsonProperty("alarm_id")
+    private String alarmId;
 }

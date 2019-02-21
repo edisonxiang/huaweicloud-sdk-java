@@ -37,15 +37,15 @@ public class CESAlarmService extends BaseCESService {
     /**
      * 创建告警规则
      */
-    public CreateOneAlarmResp createOneAlarm(CreateAlarmReq createAlarmReq) {
+    public AlarmResp create(CreateAlarmReq createAlarmReq) {
 
-        return post(CreateOneAlarmResp.class, "/alarms").entity(createAlarmReq).execute();
+        return post(AlarmResp.class, "/alarms").entity(createAlarmReq).execute();
     }
 
     /**
      * 删除告警规则
      */
-    public ActionResponse deleteOneAlarm(String alarmId) {
+    public ActionResponse delete(String alarmId) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
         return ToActionResponseFunction.INSTANCE
@@ -56,29 +56,34 @@ public class CESAlarmService extends BaseCESService {
     /**
      * 查询单条告警规则信息
      */
-    public GetSingleMetricAlarm getSingleAlarm(String alarmId) {
+    public Alarm get(String alarmId) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
-        return get(GetSingleMetricAlarm.class, "/alarms" + "/" + alarmId).execute();
+        return get(Alarm.class, "/alarms" + "/" + alarmId).execute();
     }
 
     /**
      * 查询告警规则列表
      */
-    public GetAllMetricAlarms listAlarm(Integer limit, String order, String start) {
+    public Alarms list() {
 
-        HashMap<String, Object> parameters = Maps.newHashMap();
-        parameters.put("limit", limit);
-        parameters.put("order", order);
-        parameters.put("start", start);
+        return get(Alarms.class, "/alarms").execute();
+    }
 
-        return get(GetAllMetricAlarms.class, "/alarms").params(parameters).execute();
+    /**
+     * 查询告警规则列表
+     */
+    public Alarms list(AlarmsFilterOption option) {
+        checkArgument(null != option, "parameter `option` should not be null");
+        Map<String, Object> parameters = option.getOptions();
+
+        return get(Alarms.class, "/alarms").params(parameters).execute();
     }
 
     /**
      * 启停告警规则
      */
-    public String modifyAlarmAction(String alarmId, ModifyAlarmActionReq modifyAlarmActionReq) {
+    public String update(String alarmId, ModifyAlarmActionReq modifyAlarmActionReq) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
         return put(String.class, "/alarms" + "/" + alarmId + "/action").entity(modifyAlarmActionReq).execute();

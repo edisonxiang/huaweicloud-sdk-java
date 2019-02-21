@@ -37,8 +37,8 @@ public class CESQuotaService extends BaseCESService {
     /**
      * 查询配额
      */
-    public GetQuotasResp getQuotas() {
+    public Quota get() {
 
-        return get(GetQuotasResp.class, "/quotas").execute();
+        return get(Quota.class, "/quotas").execute();
     }
 }

@@ -10,15 +10,7 @@ import com.huawei.openstack4j.core.transport.Config;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.common.Identifier;
 import com.huawei.openstack4j.openstack.OSFactory;
-import com.huawei.openstack4j.openstack.ces.v1.domain.Condition;
-import com.huawei.openstack4j.openstack.ces.v1.domain.CreateAlarmReq;
-import com.huawei.openstack4j.openstack.ces.v1.domain.CreateOneAlarmResp;
-import com.huawei.openstack4j.openstack.ces.v1.domain.GetAllMetricAlarms;
-import com.huawei.openstack4j.openstack.ces.v1.domain.GetSingleMetricAlarm;
-import com.huawei.openstack4j.openstack.ces.v1.domain.MetricInfoExt;
-import com.huawei.openstack4j.openstack.ces.v1.domain.MetricAlarms;
-import com.huawei.openstack4j.openstack.ces.v1.domain.MetricsDimension;
-import com.huawei.openstack4j.openstack.ces.v1.domain.ModifyAlarmActionReq;
+import com.huawei.openstack4j.openstack.ces.v1.domain.*;
 import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURLResolver;
 
 public class AlarmDemo {
@@ -108,7 +100,7 @@ public class AlarmDemo {
                 		.alarmLevel(2)
                 		.build();
                 
-                CreateOneAlarmResp alarmResp = os.ces().alarm().createOneAlarm(createAlarmReq);
+                AlarmResp alarmResp = os.ces().alarm().create(createAlarmReq);
                 String alarmId = "";
                 if (null != alarmResp) {
                 	alarmId =  alarmResp.getAlarmId();
@@ -118,7 +110,7 @@ public class AlarmDemo {
                 }
                 
                 // Get Alarm
-                GetSingleMetricAlarm getResp = os.ces().alarm().getSingleAlarm(alarmId);
+                Alarm getResp = os.ces().alarm().get(alarmId);
                 if (null != getResp) {
                 		List<MetricAlarms> metricAlarms = getResp.getMetricAlarms();
                         System.out.println("get alarm success, metricAlarms size: " + metricAlarms.size());
@@ -131,7 +123,7 @@ public class AlarmDemo {
                 }
                 
                 // List Alarm
-                GetAllMetricAlarms listResp = os.ces().alarm().listAlarm(4, null, null);
+                Alarms listResp = os.ces().alarm().list();
                 if (null != listResp) {
                     System.out.println("list alarm success, metadata count: " + listResp.getMetaData().getCount());
 	            } else {
@@ -147,11 +139,11 @@ public class AlarmDemo {
                 		.alarmEnabled(false)
                 		.build();
                 
-                String modifyAlarmResp = os.ces().alarm().modifyAlarmAction(alarmId, modifyAlarmActionReq);
+                String modifyAlarmResp = os.ces().alarm().update(alarmId, modifyAlarmActionReq);
                 System.out.println("modify alarm action result: " + modifyAlarmResp);
                 
                 //Delete Alarm
-                ActionResponse rep = os.ces().alarm().deleteOneAlarm(alarmId);
+                ActionResponse rep = os.ces().alarm().delete(alarmId);
         		if (rep.isSuccess()) {
         			System.out.println("delete alarm success");
         		} else {
