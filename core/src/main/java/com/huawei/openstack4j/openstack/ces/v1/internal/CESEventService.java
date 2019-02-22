@@ -37,9 +37,9 @@ public class CESEventService extends BaseCESService {
     /**
      * 上报事件
      */
-    public List<Event> create(List<EventItem> body) {
-        checkArgument(null != body, "parameter `body` should not be null");
+    public List<Event> create(List<EventItem> eventItems) {
+        checkArgument(null != eventItems, "parameter `eventItems` should not be null");
 
-        return post(Event.Events.class, "/events").entity(body).execute().getList();
+        return post(Event.Events.class, "/events").entity(eventItems).execute().getList();
     }
 }

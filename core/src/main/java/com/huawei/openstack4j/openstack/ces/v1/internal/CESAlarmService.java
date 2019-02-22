@@ -38,6 +38,7 @@ public class CESAlarmService extends BaseCESService {
      * 创建告警规则
      */
     public AlarmResp create(CreateAlarmReq createAlarmReq) {
+        checkArgument(null != createAlarmReq, "parameter `createAlarmReq` should not be null");
 
         return post(AlarmResp.class, "/alarms").entity(createAlarmReq).execute();
     }

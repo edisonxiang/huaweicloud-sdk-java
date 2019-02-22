@@ -54,6 +54,7 @@ public class CESMetricdataService extends BaseCESService {
      * 添加监控数据
      */
     public ActionResponse create(List<AddMetricDataItem> addMetricDataItem) {
+        checkArgument(null != addMetricDataItem, "parameter `addMetricDataItem` should not be null");
 
         return post(ActionResponse.class, "/metric-data").entity(addMetricDataItem).execute();
     }
