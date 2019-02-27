@@ -37,15 +37,23 @@ public class CESMetricdataService extends BaseCESService {
     /**
      * 批量查询监控数据
      */
-    public Metricdatas list() {
-
-        return post(Metricdatas.class, "/batch-query-metric-data").execute();
-    }
-
-    /**
-     * 批量查询监控数据
-     */
     public Metricdatas list(GetBatchMetricDataReq getBatchMetricDataReq) {
+
+        checkArgument(null != getBatchMetricDataReq, "parameter `getBatchMetricDataReq` should not be null");
+        checkArgument(null != getBatchMetricDataReq.getMetrics(), "parameter `metrics` should not be null");
+        for(int i=0; i<getBatchMetricDataReq.getMetrics().size(); i++) {
+            checkArgument(null != getBatchMetricDataReq.getMetrics().get(i), "parameter `MetricInfo` should not be null");
+            checkArgument(null != getBatchMetricDataReq.getMetrics().get(i).getDimensions(), "parameter `dimensions` should not be null");
+            for(int j=0; j<getBatchMetricDataReq.getMetrics().get(i).getDimensions().size(); j++) {
+                checkArgument(null != getBatchMetricDataReq.getMetrics().get(i).getDimensions().get(j), "parameter `MetricsDimension` should not be null");
+            }
+            checkArgument(!Strings.isNullOrEmpty(getBatchMetricDataReq.getMetrics().get(i).getMetricName()), "parameter `metricName` should not be empty");
+            checkArgument(!Strings.isNullOrEmpty(getBatchMetricDataReq.getMetrics().get(i).getNamespace()), "parameter `namespace` should not be empty");
+        }
+        checkArgument(null != getBatchMetricDataReq.getFrom(), "parameter `from` should not be null");
+        checkArgument(null != getBatchMetricDataReq.getTo(), "parameter `to` should not be null");
+        checkArgument(!Strings.isNullOrEmpty(getBatchMetricDataReq.getPeriod()), "parameter `period` should not be empty");
+        checkArgument(!Strings.isNullOrEmpty(getBatchMetricDataReq.getFilter()), "parameter `filter` should not be empty");
 
         return post(Metricdatas.class, "/batch-query-metric-data").entity(getBatchMetricDataReq).execute();
     }
