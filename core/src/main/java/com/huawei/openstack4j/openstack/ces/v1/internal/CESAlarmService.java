@@ -38,7 +38,22 @@ public class CESAlarmService extends BaseCESService {
      * 创建告警规则
      */
     public AlarmResp create(CreateAlarmReq createAlarmReq) {
+
         checkArgument(null != createAlarmReq, "parameter `createAlarmReq` should not be null");
+        checkArgument(!Strings.isNullOrEmpty(createAlarmReq.getAlarmName()), "parameter `alarmName` should not be empty");
+        checkArgument(null != createAlarmReq.getMetric(), "parameter `metric` should not be null");
+        checkArgument(null != createAlarmReq.getMetric().getDimensions(), "parameter `dimensions` should not be null");
+        for(int i=0; i<createAlarmReq.getMetric().getDimensions().size(); i++) {
+            checkArgument(null != createAlarmReq.getMetric().getDimensions().get(i), "parameter `MetricsDimension` should not be null");
+        }
+        checkArgument(!Strings.isNullOrEmpty(createAlarmReq.getMetric().getMetricName()), "parameter `metricName` should not be empty");
+        checkArgument(!Strings.isNullOrEmpty(createAlarmReq.getMetric().getNamespace()), "parameter `namespace` should not be empty");
+        checkArgument(null != createAlarmReq.getCondition(), "parameter `condition` should not be null");
+        checkArgument(!Strings.isNullOrEmpty(createAlarmReq.getCondition().getComparisonOperator()), "parameter `comparisonOperator` should not be empty");
+        checkArgument(null != createAlarmReq.getCondition().getCount(), "parameter `count` should not be null");
+        checkArgument(!Strings.isNullOrEmpty(createAlarmReq.getCondition().getFilter()), "parameter `filter` should not be empty");
+        checkArgument(null != createAlarmReq.getCondition().getPeriod(), "parameter `period` should not be null");
+        checkArgument(null != createAlarmReq.getCondition().getValue(), "parameter `value` should not be null");
 
         return post(AlarmResp.class, "/alarms").entity(createAlarmReq).execute();
     }

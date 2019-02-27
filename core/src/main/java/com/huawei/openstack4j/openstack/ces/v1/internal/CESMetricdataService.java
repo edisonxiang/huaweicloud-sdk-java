@@ -54,7 +54,21 @@ public class CESMetricdataService extends BaseCESService {
      * 添加监控数据
      */
     public ActionResponse create(List<AddMetricDataItem> addMetricDataItem) {
+
         checkArgument(null != addMetricDataItem, "parameter `addMetricDataItem` should not be null");
+        for(int i=0; i<addMetricDataItem.size(); i++) {
+            checkArgument(null != addMetricDataItem.get(i), "parameter `AddMetricDataItem` should not be null");
+            checkArgument(null != addMetricDataItem.get(i).getMetric(), "parameter `metric` should not be null");
+            checkArgument(null != addMetricDataItem.get(i).getMetric().getDimensions(), "parameter `dimensions` should not be null");
+            for(int j=0; j<addMetricDataItem.get(i).getMetric().getDimensions().size(); j++) {
+                checkArgument(null != addMetricDataItem.get(i).getMetric().getDimensions().get(j), "parameter `MetricsDimension` should not be null");
+            }
+            checkArgument(!Strings.isNullOrEmpty(addMetricDataItem.get(i).getMetric().getMetricName()), "parameter `metricName` should not be empty");
+            checkArgument(!Strings.isNullOrEmpty(addMetricDataItem.get(i).getMetric().getNamespace()), "parameter `namespace` should not be empty");
+            checkArgument(null != addMetricDataItem.get(i).getTtl(), "parameter `ttl` should not be null");
+            checkArgument(null != addMetricDataItem.get(i).getCollectTime(), "parameter `collectTime` should not be null");
+            checkArgument(null != addMetricDataItem.get(i).getValue(), "parameter `value` should not be null");
+        }
 
         return post(ActionResponse.class, "/metric-data").entity(addMetricDataItem).execute();
     }

@@ -38,7 +38,14 @@ public class CESEventService extends BaseCESService {
      * 上报事件
      */
     public List<Event> create(List<EventItem> eventItems) {
+
         checkArgument(null != eventItems, "parameter `eventItems` should not be null");
+        for(int i=0; i<eventItems.size(); i++) {
+            checkArgument(null != eventItems.get(i), "parameter `EventItem` should not be null");
+            checkArgument(!Strings.isNullOrEmpty(eventItems.get(i).getEventName()), "parameter `eventName` should not be empty");
+            checkArgument(null != eventItems.get(i).getTime(), "parameter `time` should not be null");
+            checkArgument(null != eventItems.get(i).getDetail(), "parameter `detail` should not be null");
+        }
 
         return post(Event.Events.class, "/events").entity(eventItems).execute().getList();
     }
