@@ -99,12 +99,12 @@ public class CESAlarmService extends BaseCESService {
     /**
      * 启停告警规则
      */
-    public String update(String alarmId, ModifyAlarmActionReq modifyAlarmActionReq) {
+    public ActionResponse update(String alarmId, ModifyAlarmActionReq modifyAlarmActionReq) {
         checkArgument(!Strings.isNullOrEmpty(alarmId), "parameter `alarmId` should not be empty");
 
         checkArgument(null != modifyAlarmActionReq, "parameter `modifyAlarmActionReq` should not be null");
         checkArgument(null != modifyAlarmActionReq.getAlarmEnabled(), "parameter `alarmEnabled` should not be null");
 
-        return put(String.class, "/alarms" + "/" + alarmId + "/action").entity(modifyAlarmActionReq).execute();
+        return put(ActionResponse.class, "/alarms" + "/" + alarmId + "/action").entity(modifyAlarmActionReq).execute();
     }
 }

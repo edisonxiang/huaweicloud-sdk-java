@@ -139,8 +139,12 @@ public class AlarmDemo {
                 		.alarmEnabled(false)
                 		.build();
                 
-                String modifyAlarmResp = os.ces().alarm().update(alarmId, modifyAlarmActionReq);
-                System.out.println("modify alarm action result: " + modifyAlarmResp);
+                ActionResponse modifyAlarmResp = os.ces().alarm().update(alarmId, modifyAlarmActionReq);
+                if (modifyAlarmResp.isSuccess()) {
+                    System.out.println("update alarm success");
+                } else {
+                    System.out.println("update alarm failed");
+                }
                 
                 //Delete Alarm
                 ActionResponse rep = os.ces().alarm().delete(alarmId);
