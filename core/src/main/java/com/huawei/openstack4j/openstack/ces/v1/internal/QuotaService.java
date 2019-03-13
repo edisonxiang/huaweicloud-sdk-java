@@ -30,9 +30,9 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
- * CESQuotaService
+ * QuotaService
  */
-public class CESQuotaService extends BaseCESService {
+public class QuotaService extends BaseCESService {
 
     /**
      * 查询配额

@@ -30,9 +30,9 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
- * CESAlarmService
+ * AlarmService
  */
-public class CESAlarmService extends BaseCESService {
+public class AlarmService extends BaseCESService {
 
     /**
      * 创建告警规则

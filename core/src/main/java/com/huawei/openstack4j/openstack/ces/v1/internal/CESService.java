@@ -21,23 +21,23 @@ import com.huawei.openstack4j.common.RestService;
 
 public class CESService extends BaseCESService implements RestService {
 
-    public CESEventService event() {
-        return Apis.get(CESEventService.class);
+    public EventService event() {
+        return Apis.get(EventService.class);
     }
 
-    public CESAlarmService alarm() {
-        return Apis.get(CESAlarmService.class);
+    public AlarmService alarm() {
+        return Apis.get(AlarmService.class);
     }
 
-    public CESMetricService metric() {
-        return Apis.get(CESMetricService.class);
+    public MetricService metric() {
+        return Apis.get(MetricService.class);
     }
 
-    public CESMetricdataService metricdata() {
-        return Apis.get(CESMetricdataService.class);
+    public MetricdataService metricdata() {
+        return Apis.get(MetricdataService.class);
     }
 
-    public CESQuotaService quota() {
-        return Apis.get(CESQuotaService.class);
+    public QuotaService quota() {
+        return Apis.get(QuotaService.class);
     }
 }

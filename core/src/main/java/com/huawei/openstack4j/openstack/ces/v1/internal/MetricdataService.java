@@ -30,9 +30,9 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
- * CESMetricdataService
+ * MetricdataService
  */
-public class CESMetricdataService extends BaseCESService {
+public class MetricdataService extends BaseCESService {
 
     /**
      * 批量查询监控数据

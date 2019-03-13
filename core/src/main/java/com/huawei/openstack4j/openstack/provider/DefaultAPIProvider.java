@@ -37,11 +37,11 @@ import com.google.common.collect.Maps;
 import com.huawei.openstack4j.api.APIProvider;
 
 import com.huawei.openstack4j.openstack.ces.v1.internal.CESService;
-import com.huawei.openstack4j.openstack.ces.v1.internal.CESEventService;
-import com.huawei.openstack4j.openstack.ces.v1.internal.CESAlarmService;
-import com.huawei.openstack4j.openstack.ces.v1.internal.CESMetricService;
-import com.huawei.openstack4j.openstack.ces.v1.internal.CESMetricdataService;
-import com.huawei.openstack4j.openstack.ces.v1.internal.CESQuotaService;
+import com.huawei.openstack4j.openstack.ces.v1.internal.EventService;
+import com.huawei.openstack4j.openstack.ces.v1.internal.AlarmService;
+import com.huawei.openstack4j.openstack.ces.v1.internal.MetricService;
+import com.huawei.openstack4j.openstack.ces.v1.internal.MetricdataService;
+import com.huawei.openstack4j.openstack.ces.v1.internal.QuotaService;
 
 
 /**
@@ -62,11 +62,11 @@ public class DefaultAPIProvider implements APIProvider {
 
 		// ces
 		bind(com.huawei.openstack4j.openstack.ces.v1.internal.CESService.class, com.huawei.openstack4j.openstack.ces.v1.internal.CESService.class);
-		bind(com.huawei.openstack4j.openstack.ces.v1.internal.CESEventService.class, com.huawei.openstack4j.openstack.ces.v1.internal.CESEventService.class);
-		bind(com.huawei.openstack4j.openstack.ces.v1.internal.CESAlarmService.class, com.huawei.openstack4j.openstack.ces.v1.internal.CESAlarmService.class);
-		bind(com.huawei.openstack4j.openstack.ces.v1.internal.CESMetricService.class, com.huawei.openstack4j.openstack.ces.v1.internal.CESMetricService.class);
-		bind(com.huawei.openstack4j.openstack.ces.v1.internal.CESMetricdataService.class, com.huawei.openstack4j.openstack.ces.v1.internal.CESMetricdataService.class);
-		bind(com.huawei.openstack4j.openstack.ces.v1.internal.CESQuotaService.class, com.huawei.openstack4j.openstack.ces.v1.internal.CESQuotaService.class);
+		bind(com.huawei.openstack4j.openstack.ces.v1.internal.EventService.class, com.huawei.openstack4j.openstack.ces.v1.internal.EventService.class);
+		bind(com.huawei.openstack4j.openstack.ces.v1.internal.AlarmService.class, com.huawei.openstack4j.openstack.ces.v1.internal.AlarmService.class);
+		bind(com.huawei.openstack4j.openstack.ces.v1.internal.MetricService.class, com.huawei.openstack4j.openstack.ces.v1.internal.MetricService.class);
+		bind(com.huawei.openstack4j.openstack.ces.v1.internal.MetricdataService.class, com.huawei.openstack4j.openstack.ces.v1.internal.MetricdataService.class);
+		bind(com.huawei.openstack4j.openstack.ces.v1.internal.QuotaService.class, com.huawei.openstack4j.openstack.ces.v1.internal.QuotaService.class);
 	}
 
 	/**

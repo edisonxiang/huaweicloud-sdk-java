@@ -30,23 +30,34 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
- * CESEventService
+ * MetricService
  */
-public class CESEventService extends BaseCESService {
+public class MetricService extends BaseCESService {
 
     /**
-     * 上报事件
+     * 查询已关注指标
      */
-    public List<Event> create(List<EventItem> eventItems) {
+    @Deprecated
+    public Metric get() {
 
-        checkArgument(null != eventItems, "parameter `eventItems` should not be null");
-        for(int i=0; i<eventItems.size(); i++) {
-            checkArgument(null != eventItems.get(i), "parameter `EventItem` should not be null");
-            checkArgument(!Strings.isNullOrEmpty(eventItems.get(i).getEventName()), "parameter `eventName` should not be empty");
-            checkArgument(null != eventItems.get(i).getTime(), "parameter `time` should not be null");
-            checkArgument(null != eventItems.get(i).getDetail(), "parameter `detail` should not be null");
-        }
+        return get(Metric.class, "/favorite-metrics").execute();
+    }
 
-        return post(Event.Events.class, "/events").entity(eventItems).execute().getList();
+    /**
+     * 查询指标列表
+     */
+    public Metrics list() {
+
+        return get(Metrics.class, "/metrics").execute();
+    }
+
+    /**
+     * 查询指标列表
+     */
+    public Metrics list(MetricsFilterOption option) {
+        checkArgument(null != option, "parameter `option` should not be null");
+        Map<String, Object> parameters = option.getOptions();
+
+        return get(Metrics.class, "/metrics").params(parameters).execute();
     }
 }
